@@ -115,6 +115,8 @@ class CLIOutput(object):
             elif status in [301, 302, 307] and 'location' in [h.lower() for h in response.headers]:
                 message = Fore.CYAN + message + Style.RESET_ALL
                 message += '  ->  {0}'.format(response.headers['location'])
+                with open("redirects_output.txt", "a") as fp:
+                    fp.write(response.headers['location'] + "\n")
 
             self.newLine(message)
 
